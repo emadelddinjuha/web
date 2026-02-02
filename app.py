@@ -37,7 +37,7 @@ class Settings:
     SUBS_ASS = "cut_ass.ass"
     FINAL_VIDEO = "final_video.mp4"
     
-    YTDLP_PATH = "python3 -m yt_dlp"  # يجب تثبيت yt-dlp في البيئة
+    YTDLP_PATH = ["python3", "-m", "yt_dlp"]   # يجب تثبيت yt-dlp في البيئة
     FFMPEG = "ffmpeg"      # يجب أن يكون ffmpeg مثبتاً
     WHISPER = "python3 -m whisper"  # افترض أن whisper مثبت
 
@@ -166,8 +166,8 @@ def _step_download(url):
         app_state.step_status[0] = '✓'
         return
     
-    result = subprocess.run([
-        Settings.YTDLP_PATH,
+    result = subprocess.run(
+        Settings.YTDLP_PATH+[
         "--cookies-from-browser", "chrome",
         "-f", "bv*[height<=1080]+ba/best",
         "--merge-output-format", "mp4",
