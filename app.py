@@ -37,9 +37,9 @@ class Settings:
     SUBS_ASS = "cut_ass.ass"
     FINAL_VIDEO = "final_video.mp4"
     
-    YTDLP_PATH = "/opt/homebrew/bin/yt-dlp"
-    FFMPEG = "/opt/homebrew/Cellar/ffmpeg-full/8.0.1/bin/ffmpeg"
-    WHISPER = "python3 -m whisper"
+    YTDLP_PATH = "yt-dlp"  # يجب تثبيت yt-dlp في البيئة
+    FFMPEG = "ffmpeg"      # يجب أن يكون ffmpeg مثبتاً
+    WHISPER = "python3 -m whisper"  # افترض أن whisper مثبت
 
 
 # ================= Application State =================
