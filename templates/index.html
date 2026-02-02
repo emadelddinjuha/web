@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Karaoke Generator - Web App</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-youtube"></i> YouTube Karaoke Generator
+            </a>
+            <span class="navbar-text text-white">
+                Web Version
+            </span>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Sidebar - Settings -->
+            <div class="col-md-3 col-lg-2">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-gear"></i> الإعدادات</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="settings-form">
+                            <div class="mb-3">
+                                <label class="form-label">رابط يوتيوب</label>
+                                <input type="url" class="form-control" id="youtube-url" 
+                                       value="{{ settings.YOUTUBE_URL }}" placeholder="https://...">
+                            </div>
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <label class="form-label">من</label>
+                                    <input type="text" class="form-control" id="start-time" 
+                                           value="{{ settings.START_TIME }}" placeholder="00:00:00">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label">إلى</label>
+                                    <input type="text" class="form-control" id="end-time" 
+                                           value="{{ settings.END_TIME }}" placeholder="00:00:00">
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="refreshAll()">
+                                    <i class="bi bi-arrow-clockwise"></i> تحديث
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="clearFiles()">
+                                    <i class="bi bi-trash"></i> حذف الملفات
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Status Legend -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-title">حالة الخطوات</h6>
+                        <div class="d-flex gap-3">
+                            <span><span class="status-indicator pending">○</span> منتظر</span>
+                            <span><span class="status-indicator processing">⏳</span> جاري</span>
+                            <span><span class="status-indicator success">✓</span> تم</span>
+                            <span><span class="status-indicator error">✗</span> خطأ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <ul class="nav nav-tabs card-header-tabs" id="main-tabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" id="process-tab" data-bs-toggle="tab" 
+                                        data-bs-target="#process-content" type="button">
+                                    <i class="bi bi-gear"></i> المعالجة
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="german-tab" data-bs-toggle="tab" 
+                                        data-bs-target="#german-content" type="button">
+                                    <i class="bi bi-pencil"></i> تحرير الألماني
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="arabic-tab" data-bs-toggle="tab" 
+                                        data-bs-target="#arabic-content" type="button">
+                                    <i class="bi bi-pencil-square"></i> تحرير العربي
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="preview-tab" data-bs-toggle="tab" 
+                                        data-bs-target="#preview-content" type="button">
+                                    <i class="bi bi-play-circle"></i> المعاينة
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="main-tabs-content">
+                            <!-- Process Tab -->
+                            <div class="tab-pane fade show active" id="process-content" role="tabpanel">
+                                {% include 'process.html' %}
+                            </div>
+                            
+                            <!-- Edit German Tab -->
+                            <div class="tab-pane fade" id="german-content" role="tabpanel">
+                                {% include 'edit_german.html' %}
+                            </div>
+                            
+                            <!-- Edit Arabic Tab -->
+                            <div class="tab-pane fade" id="arabic-content" role="tabpanel">
+                                {% include 'edit_arabic.html' %}
+                            </div>
+                            
+                            <!-- Preview Tab -->
+                            <div class="tab-pane fade" id="preview-content" role="tabpanel">
+                                {% include 'preview.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log Area -->
+                <div class="card shadow-sm mt-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-terminal"></i> السجل</h5>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="clearLogs()">
+                            <i class="bi bi-trash"></i> حذف
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <pre id="log-area" class="bg-dark text-light p-3 rounded mb-0" 
+                             style="height: 150px; overflow-y: auto; font-size: 12px;">انتظر...</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal fade" id="processing-modal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">جاري المعالجة...</span>
+                    </div>
+                    <h5>جاري المعالجة...</h5>
+                    <p class="text-muted">الرجاء الانتظار</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="live-toast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto" id="toast-title">إشعار</strong>
+                <small>الآن</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toast-message">
+                رسالة
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

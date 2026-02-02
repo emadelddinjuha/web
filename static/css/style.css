@@ -1,0 +1,269 @@
+/* YouTube Karaoke Web App - Custom Styles */
+
+/* Status Indicators */
+.status-indicator {
+    font-size: 1.2rem;
+    width: 24px;
+    display: inline-block;
+    text-align: center;
+}
+
+.status-indicator.pending {
+    color: #6c757d;
+}
+
+.status-indicator.processing {
+    color: #0d6efd;
+    animation: pulse 1s infinite;
+}
+
+.status-indicator.success {
+    color: #198754;
+}
+
+.status-indicator.error {
+    color: #dc3545;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Step Items */
+.step-item {
+    transition: all 0.2s ease;
+}
+
+.step-item:hover {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 5px;
+    margin: -5px;
+}
+
+/* Step Status Badges */
+.step-status {
+    font-size: 1.3rem;
+    width: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.step-status.status-pending {
+    color: #adb5bd;
+}
+
+.step-status.status-processing {
+    color: #0d6efd;
+    animation: pulse 1.5s infinite;
+}
+
+.step-status.status-success {
+    color: #198754;
+}
+
+.step-status.status-error {
+    color: #dc3545;
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border: none;
+}
+
+/* Textareas */
+textarea.form-control {
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+textarea#german-editor,
+textarea#arabic-editor {
+    font-family: 'Consolas', 'Monaco', monospace;
+    direction: ltr;
+    text-align: left;
+}
+
+/* Log Area */
+#log-area {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Process Status */
+#process-status {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Video Preview */
+#video-preview {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#video-preview video {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+/* Files List */
+.list-group-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.list-group-item.exists {
+    color: #198754;
+}
+
+.list-group-item.not-exists {
+    color: #6c757d;
+}
+
+/* Toast */
+.toast {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Nav Tabs */
+.nav-tabs .nav-link {
+    border: none;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    color: #495057;
+    padding: 0.75rem 1.25rem;
+}
+
+.nav-tabs .nav-link.active {
+    color: #667eea;
+    background-color: #fff;
+    border-bottom: 2px solid #667eea;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    color: #667eea;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .step-item .d-flex {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+    
+    .step-status {
+        margin-bottom: 5px;
+    }
+}
+
+/* Loading Spinner in Buttons */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn.loading::after {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Alert Boxes */
+.alert-info {
+    background-color: #e7f3ff;
+    border-color: #b8daff;
+    color: #004085;
+}
+
+/* Code styling */
+code {
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Tab content animation */
+.tab-pane {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

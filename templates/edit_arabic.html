@@ -1,0 +1,57 @@
+<!-- Edit Arabic Tab Content -->
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info mb-3">
+            <i class="bi bi-info-circle"></i>
+            <strong>تحرير الترجمة العربية</strong> - يمكنك تعديل الترجمة قبل إنتاج الفيديو
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="mb-3">
+            <label class="form-label">محتوى الترجمة (SRT)</label>
+            <textarea class="form-control font-monospace" id="arabic-editor" 
+                      rows="20" placeholder="تحميل من الملف أولاً..."></textarea>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-header">الإجراءات</div>
+            <div class="card-body d-grid gap-2">
+                <button class="btn btn-primary" onclick="loadArabicFromFile()">
+                    <i class="bi bi-folder2-open"></i> تحميل من الملف
+                </button>
+                <button class="btn btn-success" onclick="saveArabic()">
+                    <i class="bi bi-save"></i> حفظ
+                </button>
+                <button class="btn btn-outline-primary" onclick="reloadArabic()">
+                    <i class="bi bi-arrow-clockwise"></i> إعادة تحميل
+                </button>
+                <hr>
+                <button class="btn btn-outline-secondary" onclick="goToTab('process-tab')">
+                    <i class="bi bi-arrow-right"></i> العودة للمعالجة
+                </button>
+                <button class="btn btn-primary" onclick="proceedToVideo()">
+                    <i class="bi bi-play-fill"></i> متابعة للفيديو
+                </button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">معلومات</div>
+            <div class="card-body">
+                <p class="small text-muted mb-1">
+                    <strong>الملف:</strong> cut_ar.srt
+                </p>
+                <p class="small text-muted mb-0">
+                    <strong>الحالة:</strong> 
+                    <span id="arabic-status">غير محمل</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
