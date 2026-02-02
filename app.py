@@ -37,7 +37,7 @@ class Settings:
     SUBS_ASS = "cut_ass.ass"
     FINAL_VIDEO = "final_video.mp4"
     
-    YTDLP_PATH = "yt-dlp"  # يجب تثبيت yt-dlp في البيئة
+    YTDLP_PATH = "python3 -m yt_dlp"  # يجب تثبيت yt-dlp في البيئة
     FFMPEG = "ffmpeg"      # يجب أن يكون ffmpeg مثبتاً
     WHISPER = "python3 -m whisper"  # افترض أن whisper مثبت
 
