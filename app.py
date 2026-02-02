@@ -1,12 +1,5 @@
 """
-YouTube Karaoke Generator - Flask Web Application
-==================================================
-Replicates desktop_app.py functionality as a web app
-
-Phase 1: Download → Cut → Extract German SRT → [EDIT GERMAN SRT]
-Phase 2: Translate to Arabic → [EDIT ARABIC SRT] → Create ASS → Produce Video
-
-Web UI using Flask with Bootstrap 5
+YouTube  Generator - Flask Web Application
 """
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_file, send_from_directory
@@ -34,7 +27,7 @@ class Settings:
     AUDIO_WAV = "cut_audio.wav"
     SUBS_SRT_DE = "cut_de.srt"
     SUBS_SRT_AR = "cut_ar.srt"
-    SUBS_ASS = "cut_ass.ass"
+    SUBS_ASS = "cut_.ass"
     FINAL_VIDEO = "final_video.mp4"
     
     YTDLP_PATH = ["python3", "-m", "yt_dlp"]   # يجب تثبيت yt-dlp في البيئة
@@ -168,7 +161,6 @@ def _step_download(url):
     
     result = subprocess.run(
         Settings.YTDLP_PATH+[
-        "--cookies-from-browser", "chrome",
         "-f", "bv*[height<=1080]+ba/best",
         "--merge-output-format", "mp4",
         "-o", Settings.VIDEO_NAME,
@@ -666,7 +658,7 @@ def serve_file(filename):
 
 if __name__ == "__main__":
     print("=" * 50)
-    print("YouTube Karaoke Generator - Web App")
+    print("YouTube Generator - Web App")
     print("=" * 50)
     print("Starting server at http://localhost:5001")
     print("=" * 50)
